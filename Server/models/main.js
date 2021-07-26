@@ -13,8 +13,11 @@ const userSchema = new Schema({
   },
   password: String,
   companyName: String,
-  adminLevel: Number
+  adminLevel: Number,
+  contractids: [{ type: Schema.Types.ObjectId, ref: 'contracts' }]
 });
+
+
 
 userSchema.pre('save', function(next) {
   var user = this;
@@ -36,6 +39,5 @@ userSchema.pre('save', function(next) {
       });
   });
 });
-
 
 module.exports = mongoose.model("users", userSchema);

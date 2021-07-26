@@ -9,7 +9,7 @@ passport.use(new LocalStrategy(
 function(username, password, done) {
     // When a user tries to sign in this code runs
     db.findOne({userName: username}).then((user, err)=>{
-        if(!user) return done(null, false, {message: "Incorrect email."});
+        if(!user) return done(null, false, {message: "Incorrect username."});
         else if(user){
             bcrypt.compare(password, user.password, function (err, check){
                 if(check == false) return done(null, false, {message: "Incorrect password."});

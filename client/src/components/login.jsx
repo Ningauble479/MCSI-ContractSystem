@@ -1,16 +1,11 @@
 import {Grid, Box, Typography, TextField, Button} from '@material-ui/core'
 import { useState } from 'react'
-import axios from '../scripts/axios'
 
-export default function Home (){
+export default function Home (props){
 
     let [username, setUsername] = useState(null)
     let [password, setPassword] = useState(null)
 
-    let sendData = async () => {
-        let data = await axios('post', '/api/Accounts/login', {username: username, password: password})
-        console.log(data)
-    }
 
     return (
         <Grid style={{height: '100vh'}} container direction="column" justifyContent="center" alignItems="center">
@@ -21,7 +16,7 @@ export default function Home (){
                         <form style={{height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
                             <TextField id="filled-basic" label="Username" variant="filled" onChange={(e)=>{setUsername(e.target.value)}} />
                             <TextField id="filled-basic" label="Password" variant="filled" onChange={(e)=>{setPassword(e.target.value)}} />
-                            <Button variant='outlined' onClick={()=>{sendData()}}>Create Account</Button>
+                            <Button variant='outlined' onClick={()=>{props.sendData(username, password)}}>Login</Button>
                         </form>
                     </Box>
                 </Box>

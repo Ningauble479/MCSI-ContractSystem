@@ -10,8 +10,11 @@ const passport = require('../passport')
 routes.post('/register', RE)
 
 routes.post('/login', passport.authenticate('local', {session: true}), (req,res)=>{
-    console.log(req._passport)
-    res.send('test')
+    console.log(req.user)
+    if(req.user){
+        res.send(true)
+        return }
+    else return res.send(false)
 })
 
 routes.post('/logout', LO)
