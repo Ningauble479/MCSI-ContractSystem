@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.linkClean {
+  color: inherit;
+  text-decoration: none;
+}
+
+.linkClean:hover {
+  color: gray
+}
