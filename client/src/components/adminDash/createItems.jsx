@@ -108,6 +108,7 @@ export default function CreateItem(){
     let [modalOpen, openModal] = useState(false)
     let [modalContent, setModalContent] = useState([])
     let [currentid, setCurrentid] = useState(null)
+    
     let sendData = async () => {
         let data = await axios('post', '/api/Admin/addItem', {productName, productPrice, companyName})
         console.log(data.data)

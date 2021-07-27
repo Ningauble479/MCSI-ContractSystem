@@ -14,6 +14,9 @@ import CreateAccount from './components/createAccount';
 import AdminMain from './components/adminDash/adminMain';
 import CreateItem from './components/adminDash/createItems';
 import Axios from 'axios'
+import EditContracts from './components/adminDash/editContracts'
+import MainNav from './components/users/main';
+
 
 function App() {
 
@@ -59,7 +62,7 @@ function App() {
   return (
     <div> 
           <Route path='/'>
-            {!user ? <Redirect to='/login'/> : console.log(user)}
+            {!user ? <Redirect to='/login'/> : <Redirect to='/main'/>}
           </Route>
           <Route path='/admin'>
             {adminLevel < 3 ? <Redirect to='/'/> : <AdminMain/>}
@@ -70,11 +73,17 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route path="/main">
+            <MainNav admin={adminLevel < 3 ? false : true}/>
+          </Route>
           <Route path="/dashboard">
             <Dashboard />
           </Route>
           <Route path='/admin/createAccount'>
               <CreateAccount/>
+          </Route>
+          <Route path='/admin/editContracts'>
+              <EditContracts/>
           </Route>
           <Route exact path='/login'>
             {user ? <Redirect to='/'/> : <Login sendData={sendData}/>}
