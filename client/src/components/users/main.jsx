@@ -1,10 +1,16 @@
-import { AppBar, Box, Toolbar, Typography } from '@material-ui/core' 
-import { Link } from 'react-router-dom'
+import { AppBar, Box, Button, Toolbar, Typography } from '@material-ui/core' 
+import { Link, Redirect } from 'react-router-dom'
+import axios from '../../scripts/axios'
 
 
 
 
 export default function MainNav(props){
+    let logout = () => {
+        axios('post', '/api/Accounts/logout')
+        return <Redirect to='/login'/>
+    }
+    console.log(props.admin)
     return (
         <AppBar position="static">
         <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -26,7 +32,7 @@ export default function MainNav(props){
               </Box>
               {props.admin ? <Box><Link className='linkClean' to='/admin'>AdminPanel</Link></Box> : null}
           </Box>
-          <Link to='login' className='linkClean' color="inherit">Login</Link>
+          <Button onClick={()=>{logout()}}>Logout</Button>
         </Toolbar>
       </AppBar>
     )
