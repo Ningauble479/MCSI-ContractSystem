@@ -56,6 +56,20 @@ export default function DocuSigner () {
         let id = e.currentTarget.value
         let {data} = await axios('post', '/api/Contracts/addItem', {amount: itemAmount, itemid: e.currentTarget.value, monthlyprice: monthlyPrice, contractid: contract._id})
         console.log(data)
+        const itemToAdd = items.find(({ _id }) => _id === id)
+        console.log(itemToAdd)
+        let newItem = {
+            amount: itemAmount,
+            name: itemToAdd.name,
+            price: itemToAdd.price,
+            _id: itemToAdd._id
+        }
+
+        let array = addedItems
+        array.push(newItem)
+
+        setAddedItems([...array])
+
         setItems(items.filter(item => item._id !== id))
         
     }
@@ -69,7 +83,7 @@ export default function DocuSigner () {
         <Box border='1px solid black' height='10vh' width='100%'>
             <Typography>Test</Typography>
         </Box>
-        <Box display='flex' justifyContent='space-around' flexGrow='1'>
+        <Box display='flex' justifyContent='space-around' flexGrow='1' overflow='auto'>
             <Box width='45%' height='75vh' border='1px solid black'>
                 <Table>
                     <TableHead>
@@ -92,7 +106,7 @@ export default function DocuSigner () {
                     </TableBody>
                 </Table>
             </Box>
-            <Box width='45%' height='75vh' border='1px solid black'>
+            <Box width='45%' height='75vh' border='1px solid black' overflow='auto'>
             <Table>
                     <TableHead>
                         <TableRow>
