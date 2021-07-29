@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     newUser.userName = req.body.username, {unsafe: true};
     newUser.password = req.body.password, {unsafe: true};
     newUser.email = req.body.email, {unsafe: true};
-    newUser.company = req.body.companyName, {unsafe: true};
+    newUser.companyName = req.body.companyName, {unsafe: true};
     newUser.adminLevel = 0
     console.log(newUser)
     if(sanatize(newUser.userName) || sanatize(newUser.password) || sanatize(newUser.email) ){
